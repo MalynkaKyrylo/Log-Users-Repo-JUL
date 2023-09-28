@@ -1,10 +1,10 @@
 package org.example.app.services;
 
 import org.example.app.database.DBCheck;
-import org.example.app.entities.Contact;
+import org.example.app.entities.User;
 import org.example.app.exceptions.DBException;
 import org.example.app.exceptions.UpdateException;
-import org.example.app.repositories.ContactUpdateRepository;
+import org.example.app.repositories.UserUpdateRepository;
 import org.example.app.utils.*;
 
 import java.util.HashMap;
@@ -12,17 +12,17 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ContactUpdateService {
+public class UserUpdateService {
 
-    ContactUpdateRepository repository;
+    UserUpdateRepository repository;
     private static final Logger LOGGER =
-            Logger.getLogger(ContactUpdateService.class.getName());
+            Logger.getLogger(UserUpdateService.class.getName());
 
-    public ContactUpdateService(ContactUpdateRepository repository) {
+    public UserUpdateService(UserUpdateRepository repository) {
         this.repository = repository;
     }
 
-    public String updateContact(String[] data) {
+    public String updateUser(String[] data) {
         // Проверяем на наличие файла БД.
         // ДА - работаем с данными. НЕТ - уведомление об отсутствии БД.
         if (DBCheck.isDBExists()) {
@@ -45,7 +45,7 @@ public class ContactUpdateService {
             }
         }
 
-        return repository.updateContact(mapData(data));
+        return repository.updateUser(mapData(data));
     }
 
     private Map<String, String> validateData(String[] data) {
@@ -73,17 +73,21 @@ public class ContactUpdateService {
         if (PhoneValidator.isPhoneValid(data[1]))
             errors.put("phone", Constants.WRONG_PHONE_MSG);
 
+        if (EmailValidator.isEmailValid(data[2]))
+            errors.put("phone", Constants.WRONG_PHONE_MSG);
+
         return errors;
     }
 
     // Преобразовываем массив данных в объект.
-    private Contact mapData(String[] data) {
+    private User mapData(String[] data) {
         // Создаем объект.
-        Contact contact = new Contact();
+        User user = new User();
         // Устанавливаем значения свойств объекта.
-        contact.setId(Integer.parseInt(data[0].trim()));
-        contact.setPhone(data[1].trim());
+        user.setId(Integer.parseInt(data[0].trim()));
+        user.setPhone(data[1].trim());
+        user.setEmail(data[2].trim());
         // Возвращаем объект.
-        return contact;
+        return user;
     }
 }

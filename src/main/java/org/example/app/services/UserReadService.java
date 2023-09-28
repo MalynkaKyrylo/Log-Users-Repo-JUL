@@ -1,9 +1,9 @@
 package org.example.app.services;
 
 import org.example.app.database.DBCheck;
-import org.example.app.entities.Contact;
+import org.example.app.entities.User;
 import org.example.app.exceptions.DBException;
-import org.example.app.repositories.ContactReadRepository;
+import org.example.app.repositories.UserReadRepository;
 import org.example.app.utils.Constants;
 
 import java.util.List;
@@ -11,17 +11,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ContactReadService {
+public class UserReadService {
 
-    ContactReadRepository repository;
+    UserReadRepository repository;
     private static final Logger LOGGER =
-            Logger.getLogger(ContactReadService.class.getName());
+            Logger.getLogger(UserReadService.class.getName());
 
-    public ContactReadService(ContactReadRepository repository) {
+    public UserReadService(UserReadRepository repository) {
         this.repository = repository;
     }
 
-    public String readContacts() {
+    public String readUsers() {
         // Проверяем на наличие файла БД.
         // ДА - работаем с данными. НЕТ - уведомление об отсутствии БД.
         if (DBCheck.isDBExists()) {
@@ -34,24 +34,26 @@ public class ContactReadService {
         }
 
         // Получаем данные в коллекцию.
-        List<Contact> contacts = repository.readContacts();
+        List<User> users = repository.readUsers();
 
         // Если коллекция не null, формируем вывод.
         // Иначе уведомление об отсутствии данных.
-        if (contacts != null) {
+        if (users != null) {
             // Если коллекция не пуста, формируем вывод.
             // Иначе уведомление об отсутствии данных.
-            if (!contacts.isEmpty()) {
+            if (!users.isEmpty()) {
                 AtomicInteger count = new AtomicInteger(0);
                 StringBuilder stringBuilder = new StringBuilder();
-                contacts.forEach((contact) ->
+                users.forEach((user) ->
                         stringBuilder.append(count.incrementAndGet())
                                 .append(") id - ")
-                                .append(contact.getId())
+                                .append(user.getId())
                                 .append(", ")
-                                .append(contact.getName())
+                                .append(user.getName())
                                 .append(", ")
-                                .append(contact.getPhone())
+                                .append(user.getPhone())
+                                .append(", ")
+                                .append(user.getEmail())
                                 .append("\n")
                 );
                 return stringBuilder.toString();
