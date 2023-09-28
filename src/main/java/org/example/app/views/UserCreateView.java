@@ -2,7 +2,7 @@ package org.example.app.views;
 
 import java.util.Scanner;
 
-public class ContactCreateView {
+public class UserCreateView {
 
     // Получение данных.
     public String[] getData() {
@@ -11,12 +11,15 @@ public class ContactCreateView {
 
         String title = "Enter name: ";
         System.out.print(title);
-        String name = scanner.nextLine();
+        String name = scanner.nextLine().trim();
         title = "Enter phone in format xxx xxx-xxxx: ";
         System.out.print(title);
-        String phone = scanner.nextLine();
+        String phone = scanner.nextLine().trim();
+        title = "Enter email in format example@mail.com: ";
+        System.out.print(title);
+        String email = scanner.nextLine().trim();
 
-        return new String[] {name, phone};
+        return new String[] {name, phone, email};
     }
 
     // Вывод результата.

@@ -1,7 +1,7 @@
 package org.example.app.views;
 
 
-public class ContactReadView {
+public class UserReadView {
 
     // Вывод результата.
     public void getOutput(String output) {
