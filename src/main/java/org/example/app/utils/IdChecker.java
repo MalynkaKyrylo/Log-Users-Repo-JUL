@@ -12,7 +12,7 @@ public class IdChecker {
     public static boolean isIdExists(int id) {
 
         try {
-            String query = "SELECT COUNT(id) FROM " + Constants.TABLE_CONTACTS + " WHERE id = ?";
+            String query = "SELECT COUNT(id) FROM " + Constants.TABLE_USERS + " WHERE id = ?";
             PreparedStatement pst = DBConn.connect().prepareStatement(query);
             pst.setInt(1, id);
 
