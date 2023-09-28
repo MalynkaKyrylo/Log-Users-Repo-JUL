@@ -1,3 +1,7 @@
+Task:
+Подібно проекту Log-Contacts-Repo-JUL створити проект Log-Users-Repo-JUL. User має ім'я, телефон, email.
+----------------------------------------------
+
 Реализованы базовые CRUD операции
 по работе с локальной SQLite БД.
 
@@ -18,16 +22,17 @@ https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
 3) В src/main/resources создаем папку database
 
 4) Через DB Browser for SQLite (https://sqlitebrowser.org/),
-в src/main/resources/database, создаем файл БД (contacts_db.db).
+в src/main/resources/database, создаем файл БД (users_db.db).
 
-5) Через DB Browser for SQLite создаем таблицу в БД (contacts)
+5) Через DB Browser for SQLite создаем таблицу в БД (users)
 
 SQL-запрос на создание таблицы:
 
-CREATE TABLE IF NOT EXISTS contacts (
+CREATE TABLE IF NOT EXISTS users (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   phone TEXT NOT NULL
+  email TEXT NOT NULL
 )
 
 ВНИМАНИЕ. После манипуляций в базе данных,
