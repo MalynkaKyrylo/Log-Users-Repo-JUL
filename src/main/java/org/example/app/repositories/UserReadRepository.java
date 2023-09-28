@@ -1,7 +1,7 @@
 package org.example.app.repositories;
 
 import org.example.app.database.DBConn;
-import org.example.app.entities.Contact;
+import org.example.app.entities.User;
 import org.example.app.utils.Constants;
 
 import java.sql.ResultSet;
@@ -11,26 +11,27 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ContactReadRepository {
+public class UserReadRepository {
 
     private static final Logger LOGGER =
-            Logger.getLogger(ContactReadRepository.class.getName());
+            Logger.getLogger(UserReadRepository.class.getName());
 
-    public List<Contact> readContacts() {
+    public List<User> readUsers() {
 
         try (Statement stmt = DBConn.connect().createStatement()) {
 
-            List<Contact> list = new ArrayList<>();
+            List<User> list = new ArrayList<>();
 
-            String sql = "SELECT id, name, phone FROM " + Constants.TABLE_CONTACTS;
+            String sql = "SELECT id, name, phone, email FROM " + Constants.TABLE_USERS;
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Contact contact = new Contact();
-                contact.setId(rs.getInt("id"));
-                contact.setName(rs.getString("name"));
-                contact.setPhone(rs.getString("phone"));
-                list.add(contact);
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setPhone(rs.getString("phone"));
+                user.setEmail(rs.getString("email"));
+                list.add(user);
             }
             // Возвращаем коллекцию данных
             return list;

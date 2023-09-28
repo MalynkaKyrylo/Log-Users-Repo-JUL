@@ -1,7 +1,7 @@
 package org.example.app.repositories;
 
 import org.example.app.database.DBConn;
-import org.example.app.entities.Contact;
+import org.example.app.entities.User;
 import org.example.app.utils.Constants;
 
 import java.sql.PreparedStatement;
@@ -9,19 +9,20 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ContactCreateRepository {
+public class UserUpdateRepository {
 
     private static final Logger LOGGER =
-            Logger.getLogger(ContactCreateRepository.class.getName());
+            Logger.getLogger(UserUpdateRepository.class.getName());
 
-    public String createContact(Contact contact) {
-        String sql = "INSERT INTO " + Constants.TABLE_CONTACTS + "(name, phone) VALUES(?, ?)";
+    public String updateUser(User user) {
+
+        String sql = "UPDATE " + Constants.TABLE_USERS + " SET phone = ? WHERE id = ?";
         // PreparedStatement - подготовленное выражение, чтобы избежать SQL-инъекций
         try (PreparedStatement pstmt = DBConn.connect().prepareStatement(sql)) {
-            pstmt.setString(1, contact.getName());
-            pstmt.setString(2, contact.getPhone());
+            pstmt.setString(1, user.getPhone());
+            pstmt.setInt(2, user.getId());
             pstmt.executeUpdate();
-            return Constants.DATA_INSERT_MSG;
+            return Constants.DATA_UPDATE_MSG;
         } catch (SQLException e) {
             LOGGER.log(Level.WARNING, Constants.LOG_DB_ERROR_MSG);
             return e.getMessage();
