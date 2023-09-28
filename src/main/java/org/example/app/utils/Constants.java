@@ -4,8 +4,8 @@ public final class Constants {
 
     public final static String DB_DRIVER = "jdbc:sqlite:";
     public final static String DB_BASE_URL = "src/main/resources/database/";
-    public final static String DB_NAME = "contacts_db.db";
-    public final static String TABLE_CONTACTS = "contacts";
+    public final static String DB_NAME = "users_db.db";
+    public final static String TABLE_USERS = "users";
     public final static String DB_ABSENT_MSG = "\n>> No database!";
     public final static String DATA_ABSENT_MSG = "\n>> No data!";
     public final static String DATA_INSERT_MSG = "\n>> Created.";
@@ -18,6 +18,10 @@ public final class Constants {
     // Regexes для номера телефона формата xxx xxx-xxxx
     public final static String PHONE_RGX = "[0-9]{3}[\\ ][0-9]{3}-[0-9]{4}";
     public final static String WRONG_PHONE_MSG = "Wrong phone format.";
+
+    // Regex для email
+    public final static String EMAIL_RGX = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+    public final static String WRONG_EMAIL_MSG = "Wrong email input.";
 
     // Regexes для id
     public final static String ID_RGX = "[0-9]";
