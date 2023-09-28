@@ -73,9 +73,6 @@ public class UserUpdateService {
         if (PhoneValidator.isPhoneValid(data[1]))
             errors.put("phone", Constants.WRONG_PHONE_MSG);
 
-        if (EmailValidator.isEmailValid(data[2]))
-            errors.put("phone", Constants.WRONG_PHONE_MSG);
-
         return errors;
     }
 
@@ -86,7 +83,6 @@ public class UserUpdateService {
         // Устанавливаем значения свойств объекта.
         user.setId(Integer.parseInt(data[0].trim()));
         user.setPhone(data[1].trim());
-        user.setEmail(data[2].trim());
         // Возвращаем объект.
         return user;
     }
